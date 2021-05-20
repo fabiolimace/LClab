@@ -1,0 +1,26 @@
+# pessoais possessivos
+meu
+minha
+teu
+tua
+seu
+sua
+meus
+minhas
+teus
+tuas
+seus
+suas
+nosso
+nossa
+vosso
+vossa
+seu
+sua
+nossos
+nossas
+vossos
+vossas
+seus
+suas
+

@@ -10,7 +10,7 @@ CREATE TABLE tb_token (
 	tokid   integer primary key, -- hash(token)
 	token   text not null,       -- 1, 2 or 3 words
 	ng      integer,             -- NGRAM: 1, 2 or 3
-	dc      integer,             -- DC: document count                     // select x.tokid, count(1) from tb_document_token x join tb_token y on y.tokid = x.tokid group by x.tokid;
+	dc      integer,             -- DC: document count
 	idf     real                 -- IDF = LOG ( DOCUMENTS_TOTAL / DC )
 );
 '''

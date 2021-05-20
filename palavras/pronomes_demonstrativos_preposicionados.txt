@@ -1,0 +1,35 @@
+
+# prep 'de' + pron
+deste
+desse
+daquele
+destes
+desses
+daqueles
+desta
+dessa
+daquela
+destas
+dessas
+daquelas
+disto
+disso
+daquilo
+
+# prep 'em' + pron
+neste
+nesse
+naquele
+nestes
+nesses
+naqueles
+nesta
+nessa
+naquela
+nestas
+nessas
+naquelas
+nisto
+nisso
+naquilo
+

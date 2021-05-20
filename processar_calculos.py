@@ -4,7 +4,7 @@ import math
 import sqlite3
 
 # variables
-database_file = "database (cópia).db"
+database_file = "database.db"
 
 def gravar_calculos_tfidf():
 

@@ -1,0 +1,93 @@
+# afirmação
+sim
+certamente
+efetivamente
+realmente
+
+# dúvida
+acaso
+porventura
+possivelmente
+provavelmente
+quiçá
+talvez
+
+# intensidade
+assaz
+bastante
+bem
+demais
+mais
+menos
+muito
+pouco
+quanto
+quão
+quase
+tanto
+tão
+
+# lugar
+abaixo
+acima
+adiante
+aí
+além
+ali
+aquém
+aqui
+atrás
+através
+cá
+defronte
+dentro
+detrás
+fora
+junto
+lá
+longe
+onde
+perto
+
+# modo
+assim
+bem
+debalde
+depressa
+devagar
+mal
+melhor
+pior
+# e quase todos terminados em 'mente'
+
+# negação
+não
+tampouco
+
+# tempo
+agora
+ainda
+amanhã
+anteontem
+antes
+breve
+cedo
+depois
+então
+hoje
+já
+jamais
+logo
+nunca
+ontem
+outrora
+sempre
+tarde
+
+# interrogativos
+por que
+onde
+como
+quando
+
+

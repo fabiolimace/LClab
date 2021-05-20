@@ -1,0 +1,74 @@
+# pessoais pessoais oblíquos tônicos preposicionados
+
+# a + pronome
+a mim
+a ti
+a ele
+a ela
+a nós
+a vós
+a eles
+a elas
+
+# de + pronome
+de mim
+de ti
+dele
+dela
+de nós
+de vós
+deles
+delas
+
+# com + pronome
+comigo
+contigo
+com ele
+com ela
+conosco
+convosco
+com eles
+com elas
+
+# em + pronome
+em mim
+em ti
+nele
+nela
+em nós
+em vós
+neles
+nelas
+
+# para + pronome
+para mim
+para ti
+para ele
+para ela
+para nós
+para vós
+para eles
+para elas
+
+# por + pronome
+por mim
+por ti
+por ele
+por ela
+por nós
+por vós
+por eles
+por elas
+
+# sem + pronome
+sem mim
+sem ti
+sem ele
+sem ela
+sem nós
+sem vós
+sem eles
+sem elas
+
+# continua...
+

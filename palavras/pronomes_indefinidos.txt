@@ -1,0 +1,63 @@
+# indefinidos
+
+# masculino
+algum
+nenhum
+todo
+outro
+muito
+pouco
+certo
+vário
+tanto
+quanto
+qualquer
+
+# masculino plural
+alguns
+nenhuns
+todos
+outros
+muitos
+poucos
+certos
+vários
+tantos
+quantos
+quaisquer
+
+# feminino
+alguma
+nenhuma
+toda
+outra
+muita
+pouca
+certa
+vária
+tanta
+quanta
+qualquer
+
+# feminino plural
+algumas
+nenhumas
+todas
+outras
+muitas
+poucas
+certas
+várias
+tantas
+quantas
+quaisquer
+
+# invariaveis
+alguém
+ninguém
+tudo
+outrem
+nada
+cada
+algo
+

@@ -1,0 +1,24 @@
+# pessoais pessoais oblíquos mesoclíticos
+me
+te
+lhe
+nos
+vos
+lhes
+
+# a, as, o, os após letra que não seja r, s ou z
+a
+as
+o
+os
+
+# a, as, o, os após letra r, s ou z
+la
+las
+na
+nas
+lo
+los
+no
+nos
+

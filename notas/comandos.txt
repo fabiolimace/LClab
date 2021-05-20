@@ -1,0 +1,82 @@
+
+
+# Obter uma lista de palavras em portugues ordenadas e não repetidas
+
+cat /usr/share/dict/brazilian /usr/share/dict/portuguese | sort -u > lista_de_palavras.txt
+
+# Extrair verbos na forma infinitivos de uma lista de palavras
+cat palavras/todas.txt | egrep '^[^A-Z][^áâãéêíóôõúü]+ar$'
+cat palavras/todas.txt | egrep '^[^A-Z][^áâãéêíóôõúü]+er$'
+cat palavras/todas.txt | egrep '^[^A-Z][^áâãéêíóôõúü]+ir$'
+
+# Criar radicais verbais a partir de uma lista de verbos no infinitivo
+
+cat palavras/verbos_infinitivos.txt | sed s/[aei]r$// > palavras/verbos_radicais.txt
+
+# Criar temas verbais (radical + vogal temática) a partir de uma lista de verbos no infinitivo
+
+cat palavras/verbos_infinitivos.txt | sed s/r$// > palavras/verbos_temas.txt
+
+# Listar palavras terminadas com "mente", para depois filtrar apenas os advérbios
+
+cat palavras/todas.txt | egrep '^[^A-Z][a-z]+mente$'
+
+# Criar gerúndios a partir de uma lista de temas verbais
+
+cat palavras/verbos_temas.txt | sed s/$/ndo/ > palavras/verbos_gerundios.txt
+
+# Criar adjetivos superlativos terminados em "íssmio" partir de uma lista de todas as palavras
+
+cat palavras/todas.txt | egrep '^[^A-Z][a-z]+íssim[ao]$' > palavras/adjetivos_issimo.txt
+
+# fazer copia temporaria para edicao
+cat livro.txt > /tmp/temporario.txt
+
+# substituir sinais de pontuacao por quebras de linha
+sed -i 's/[,.?!;:]\+/\n/g' /tmp/temporario.txt
+
+# remover caracteres que não são alfanuméricos, preservando hífen e espaço
+sed -i 's/[^a-zA-Z -]//g' /tmp/temporario.txt
+
+# substituir letras maiusculas por letras minusculas
+cat /tmp/temporario.txt | tr 'A-ZÇÁÀÂÃÉÊÍÓÔÕÚÜ' 'a-zçáàâãéêíóôõúü' > /tmp/temporario.lower.txt
+mv /tmp/temporario.lower.txt /tmp/temporario.txt
+
+# remover espacos duplicados que porventura existam
+sed -i 's/[ ]\+/ /g' /tmp/temporario.txt
+
+# remover espacos nos inicios e finais de linhas
+sed -i 's/^[ ]\+//g' /tmp/temporario.txt
+sed -i 's/[ ]\+$//g' /tmp/temporario.txt
+
+# remover linhas em branco
+sed -i '/^$/d' /tmp/temporario.txt
+
+# remover algarismos romanos até 89, exceto I, V, X, L
+cat teste.txt | sed 's/[IVXL][IVXL]\+//g'
+
+# Contar frequencia das terminações de palavras
+cat palavras/todas.txt | iconv -f utf-8 -t ascii//TRANSLIT | rev | cut -c-4 | rev | sort | uniq -dc | sort -h
+
+# localizacao de substantivos por sufixos
+cat palavras/todas.txt | egrep 'dades?$' | wc -l
+cat palavras/todas.txt | egrep '(çãos?|ções)$'
+cat palavras/todas.txt | egrep 'tudes?$ # exceto ito: 'estude'
+cat palavras/todas.txt | egrep 'anças?$'
+cat palavras/todas.txt | egrep 'nh[ao]s?$' # exceto verbos terminados em nho: desenho, desenhas
+cat palavras/todas.txt | egrep 'ito?$' # exceto verbos terminados em 'ito': deito, deposito
+cat palavras/todas.txt | egrep '^[A-Z][a-z]+' # nomes próprios, inclusive com acento na primeira letra(?)
+cat palavras/todas.txt | egrep '^[A-Z][A-Z]+[a-z]*$' # obtem siglas
+cat palavras/todas.txt | egrep -v '(o|es|e|os|eis|emos|am|em|ia|ias|á|ar|er|ir|ei|ás|íeis|i|ado|ido|ndo|as|ra|is|iu|va|a|ou|ê|ês|z)$' # palavras que nao sao verbos (organizar)
+cat palavras/todas.txt | egrep '[a-z][^aáâãeéêiíoóôõuúrszlmn]+$' # algumas palavras estrangeiras
+cat palavras/todas.txt | egrep 'dor$' $ dor: lenhador
+cat palavras/todas.txt | egrep 'deira$'
+cat palavras/todas.txt | egrep '[áâéêíóôú][a-z]+c[ao]s?$ # eletrônica, ética, prático
+cat palavras/todas.txt | egrep '[áâéêíóôú][a-z]+d[ao]s?$' # cálido, úmidas, tímida
+cat palavras/todas.txt | egrep '[áâéêíóôú][a-z]+[^aeioum][aeiou]s?$' # proparoxítonas
+cat palavras/todas.txt | egrep '[^fd][aeiou]z$' # terminadas com xiz, exceto verbos terminados em zer e zir: fiz, faz, conduz, produz
+cat palavras/todas.txt | egrep '[aeiou]l$' # al, el, il...
+cat palavras/todas.txt | egrep '[áéíóú](vel|veis)$' | ável, áveis, ível, íveis...
+
+
+

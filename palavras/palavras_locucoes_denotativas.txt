@@ -1,0 +1,43 @@
+# palavras que não são nenhuma outra das classes, que às vezes são enquadradas indevidamente entre os advérbios
+
+# inclusão
+até
+inclusive
+mesmo
+também
+
+# exclusão
+apenas
+menos
+salvo
+senão
+só
+somente
+
+# designação
+eis
+eis-me
+# ei-la ?
+# ei-las ?
+# ei-lo ?
+# ei-la ?
+
+# realce
+cá
+lá
+é que
+ora
+só
+
+# retificação
+aliás
+ou antes
+isto é
+ou melhor
+
+# situação
+afinal
+agora
+então
+mas
+

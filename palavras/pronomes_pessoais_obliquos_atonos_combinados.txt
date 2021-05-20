@@ -1,0 +1,49 @@
+# pessoais pessoais oblíquos àtonos
+
+# (me, te, lhe, nos, vos, lhes) + o
+mo
+to
+lho
+no-lo
+vo-lo
+lho
+
+# (me, te, lhe, nos, vos, lhes) + a
+ma
+ta
+lha
+no-la
+vo-la
+lha
+
+# (me, te, lhe, nos, vos, lhes) + os
+tos
+lhos
+no-los
+vo-los
+lhos
+
+# (me, te, lhe, nos, vos, lhes) + as
+mas
+tas
+lhas
+no-las
+vo-las
+lhas
+
+# se + (me, te, lhe, nos, vos, lhes (nunca o, a, os, as)) [depois do verbo]
+se-me
+se-te
+se-lhe
+se-nos
+se-vos
+se-lhes
+
+# se + (me, te, lhe, nos, vos, lhes (nunca o, a, os, as)) [antes do verbo]
+se me
+se te
+se lhe
+se nos
+se vos
+se lhes
+

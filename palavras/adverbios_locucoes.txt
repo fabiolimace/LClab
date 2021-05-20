@@ -1,0 +1,71 @@
+# afirmacao (ou dúvida)
+com certeza
+por certo
+sem dúvida
+
+# intensidade
+de muito
+de pouco
+de todo
+
+# lugar
+à direita
+à esquerda
+à distância
+ao lado
+de dentro
+de cima
+de longe
+de perto
+em cima
+para dentro
+para onde
+por ali
+por aqui
+por dentro
+por fora
+por onde
+por perto
+
+# modo
+à toa
+à vontade
+ao contrário
+ao léu
+às avessas
+às claras
+às direitas
+às pressas
+com gosto
+com amor
+de bom grado
+de cor
+de má vontade
+de regra
+em geral
+em silêncio
+em vão
+frente a frente
+gota a gota
+ombro a ombro
+passo a passo
+pouco a pouco
+por acaso
+
+# negação
+de forma alguma
+de modo nenhum
+
+# tempo
+à noite
+à tarde
+à tardinha
+de dia
+de manhã
+de noite
+de vez em quando
+de tempos em tempos
+em breve
+pela manhã
+
+

@@ -1,0 +1,37 @@
+# coordenativas aditivas
+e
+nem
+
+# coordenativas adversativas
+mas
+porém
+todavia
+contudo
+no entanto
+entretanto
+
+# coordenativas alternativas
+ou
+# ou...ou
+# ora...ora
+# quer...quer
+# seja...seja
+# nem...nem
+# já...já
+
+
+# coordenativas conclusivas
+logo
+pois
+portanto
+por conseguinte
+por isso
+assim
+então
+
+# coordenativas explicativa
+que
+porque
+pois
+porquanto
+

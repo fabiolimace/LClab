@@ -1,0 +1,259 @@
+
+Foi reunida uma coleção de ebooks em formato .txt.
+
+Foi criada uma lista com todas as palavras:
+
+	cat /usr/share/dict/brazilian /usr/share/dict/portuguese | sort -u > palavras/todas.txt
+
+Foi criada uma lista artificial de verbos infinitivos impessoais a partir de da lista de todas as palavras
+
+	cat palavras/todas.txt | egrep '[aei]ndo$'  | sed 's/ndo$/r/'   > /tmp/verbos_infinitivos_impessoais_temporarios.txt #  ando,  endo,  indo
+	cat palavras/todas.txt | egrep 'ado$'       | sed 's/ado$/ar/' >> /tmp/verbos_infinitivos_impessoais_temporarios.txt #   ado,     -,     -
+	cat palavras/todas.txt | egrep 'ido$'       | sed 's/ido$/er/' >> /tmp/verbos_infinitivos_impessoais_temporarios.txt #     -,   ido,     -
+	cat palavras/todas.txt | egrep 'ido$'       | sed 's/ido$/ir/' >> /tmp/verbos_infinitivos_impessoais_temporarios.txt #     -,     -,   ido
+	cat palavras/todas.txt | egrep '[aei]res$'  | sed 's/res$/r/'  >> /tmp/verbos_infinitivos_impessoais_temporarios.txt #  ares,  eres,  ires
+	cat palavras/todas.txt | egrep '[aei]rmos$' | sed 's/rmos$/r/' >> /tmp/verbos_infinitivos_impessoais_temporarios.txt # armos, ermos, irmos
+	cat palavras/todas.txt | egrep '[aei]rdes$' | sed 's/rdes$/r/' >> /tmp/verbos_infinitivos_impessoais_temporarios.txt # ardes, erdes, irdes
+	cat palavras/todas.txt | egrep '[aei]rem$'  | sed 's/rem$/r/'  >> /tmp/verbos_infinitivos_impessoais_temporarios.txt #  arem,  erem,  irem
+	cat /tmp/verbos_infinitivos_impessoais_temporarios.txt | sort | uniq -d > /tmp/verbos_infinitivos_impessoais_candidatos.txt # usar `uniq -d`
+	cat palavras/todas.txt /tmp/verbos_infinitivos_impessoais_candidatos.txt | sort | uniq -d > palavras/verbos_infinitivos_impessoais_artificiais.txt
+
+Foi criada uma lista artificial de verbos infinitivos pessoais a partir de da lista de todas as palavras e da lista artificial de verbos infinitivos impessoais
+
+	cat palavras/verbos_infinitivos_impessoais_artificiais.txt                 > /tmp/verbos_infinitivos_pessoais_temporarios.txt # eu, ele
+	cat palavras/verbos_infinitivos_impessoais_artificiais.txt | sed s/$/es/  >> /tmp/verbos_infinitivos_pessoais_temporarios.txt # tu
+	cat palavras/verbos_infinitivos_impessoais_artificiais.txt | sed s/$/mos/ >> /tmp/verbos_infinitivos_pessoais_temporarios.txt # nos
+	cat palavras/verbos_infinitivos_impessoais_artificiais.txt | sed s/$/des/ >> /tmp/verbos_infinitivos_pessoais_temporarios.txt # vos
+	cat palavras/verbos_infinitivos_impessoais_artificiais.txt | sed s/$/em/  >> /tmp/verbos_infinitivos_pessoais_temporarios.txt # eles
+	cat /tmp/verbos_infinitivos_pessoais_temporarios.txt     | sort            > /tmp/verbos_infinitivos_pessoais_candidatos.txt    # nao usar `uniq -d`
+	cat palavras/todas.txt /tmp/verbos_infinitivos_pessoais_candidatos.txt | sort | uniq -d > palavras/verbos_infinitivos_pessoais_artificiais.txt
+	
+Foi criada uma lista artificial de temas verbais (radical + vogal temática) a partir de uma lista artificial de verbos no infinitivo impessoal
+
+	cat palavras/verbos_infinitivos_impessoais_artificiais.txt | sed s/r$// > palavras/verbos_temas_artificiais.txt
+	
+Foi criada uma lista artificial de gerúndios a partir de uma lista artificial de temas verbais
+
+	cat palavras/verbos_temas_artificiais.txt | sed s/$/ndo/ > palavras/verbos_gerundios_artificiais.txt
+
+Foi criada uma lista artificial de particípios a partir de uma lista artificial de temas verbais
+
+	cat palavras/verbos_temas_artificiais.txt | sed s/$/ndo/ > palavras/verbos_participios_artificiais.txt
+
+Foi criada uma lista artificial de imperativos afirmativos a partir de uma lista artificial de temas verbais
+
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/a/     > /tmp/verbos_imperativos_temporarios.txt # fala
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/e/    >> /tmp/verbos_imperativos_temporarios.txt # fale
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/emos/ >> /tmp/verbos_imperativos_temporarios.txt # falemos
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/ai/   >> /tmp/verbos_imperativos_temporarios.txt # falai
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/em/   >> /tmp/verbos_imperativos_temporarios.txt # falem
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/e/    >> /tmp/verbos_imperativos_temporarios.txt # corre
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/a/    >> /tmp/verbos_imperativos_temporarios.txt # corra
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/amos/ >> /tmp/verbos_imperativos_temporarios.txt # corramos
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/ei/   >> /tmp/verbos_imperativos_temporarios.txt # correi
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/am/   >> /tmp/verbos_imperativos_temporarios.txt # corram
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/e/    >> /tmp/verbos_imperativos_temporarios.txt # parte
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/a/    >> /tmp/verbos_imperativos_temporarios.txt # parta
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/amos/ >> /tmp/verbos_imperativos_temporarios.txt # partamos
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/i/    >> /tmp/verbos_imperativos_temporarios.txt # parti
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/am/   >> /tmp/verbos_imperativos_temporarios.txt # partam
+	cat /tmp/verbos_imperativos_temporarios.txt           | sort -u         > palavras/verbos_imperativos_afirmativos_artificiais.txt
+
+Foi criada uma lista artificial de imperativos negativos a partir de uma lista artificial de temas verbais
+
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/es/    > /tmp/verbos_imperativos_temporarios.txt # fales
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/e/    >> /tmp/verbos_imperativos_temporarios.txt # fale
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/emos/ >> /tmp/verbos_imperativos_temporarios.txt # falemos
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/eis/  >> /tmp/verbos_imperativos_temporarios.txt # faleis
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/em/   >> /tmp/verbos_imperativos_temporarios.txt # falem
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/as/   >> /tmp/verbos_imperativos_temporarios.txt # corras
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/a/    >> /tmp/verbos_imperativos_temporarios.txt # corra
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/amos/ >> /tmp/verbos_imperativos_temporarios.txt # corramos
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/ais/  >> /tmp/verbos_imperativos_temporarios.txt # corrais
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/am/   >> /tmp/verbos_imperativos_temporarios.txt # corram
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/as/   >> /tmp/verbos_imperativos_temporarios.txt # partas
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/a/    >> /tmp/verbos_imperativos_temporarios.txt # parta
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/amos/ >> /tmp/verbos_imperativos_temporarios.txt # partamos
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/ais/  >> /tmp/verbos_imperativos_temporarios.txt # partais
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/am/   >> /tmp/verbos_imperativos_temporarios.txt # partam
+	cat /tmp/verbos_imperativos_temporarios.txt           | sort -u         > palavras/verbos_imperativos_negativos_artificiais.txt
+
+Foi criada uma lista artificial de subjuntivos presentes a partir de uma lista artificial de temas verbais
+
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/e/     > /tmp/verbos_subjuntivos_presentes_temporarios.txt # fale
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/es/   >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # fales
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/e/    >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # fale
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/emos/ >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # falemos
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/eis/  >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # faleis
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/em/   >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # falem
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/a/    >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # corra
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/as/   >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # corras
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/a/    >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # corra
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/amos/ >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # corramos
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/ais/  >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # corrais
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/am/   >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # corram
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/a/    >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # parta
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/as/   >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # partas
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/a/    >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # parta
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/amos/ >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # partamos
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/ais/  >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # partais
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/am/   >> /tmp/verbos_subjuntivos_presentes_temporarios.txt # partam
+	cat /tmp/verbos_subjuntivos_presentes_temporarios.txt | sort -u         > palavras/verbos_subjuntivos_presentes_artificiais.txt
+	
+Foi criada uma lista artificial de subjuntivos passados a partir de uma lista artificial de temas verbais
+
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/asse/     > /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # falasse
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/asses/   >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # falasses
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/asse/    >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # falasse
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/ássemos/ >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # falássemos
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/ásseis/  >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # faláseis
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/assem/   >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # falassem
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/esse/    >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # corresse
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/esses/   >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # corresses
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/esse/    >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # corresse
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/êssemos/ >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # corrêssemos
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/êsseis/  >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # corrêsseis
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/essem/   >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # corressem
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/isse/    >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # partisse
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/isses/   >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # partisses
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/isse/    >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # partisse
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/íssemos/ >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # partíssemos
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/ísseis/  >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # partísseis
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/issem/   >> /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt # partissem
+	cat /tmp/verbos_subjuntivos_preteritos_imperfeitos_temporarios.txt | sort -u > palavras/verbos_subjuntivos_preteritos_imperfeitos_artificiais.txt
+
+Foi criada uma lista artificial de subjuntivos futuros a partir de uma lista artificial de temas verbais
+
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/ar/     > /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # fale
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/ares/  >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # fales
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/ar/    >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # fale
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/armos/ >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # falemos
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/ardes/ >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # faleis
+	cat palavras/verbos_temas_artificiais.txt | grep 'a$' | sed s/a$/arem/  >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # falem
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/er/    >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # corra
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/eres/  >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # corras
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/er/    >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # corra
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/ermos/ >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # corramos
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/erdes/ >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # corrais
+	cat palavras/verbos_temas_artificiais.txt | grep 'e$' | sed s/e$/erem/  >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # corram
+	
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/ir/    >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # parta
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/ires/  >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # partas
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/ir/    >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # parta
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/irmos/ >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # partamos
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/irdes/ >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # partais
+	cat palavras/verbos_temas_artificiais.txt | grep 'i$' | sed s/i$/irem/  >> /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt # partam
+	cat /tmp/verbos_subjuntivos_futuros_simples_temporarios.txt | sort -u    > palavras/verbos_subjuntivos_futuros_simples_artificiais.txt
+	
+Foi criada uma lista artificial de adjetivos 'íssimo' a partir de uma lista de todas as palavras
+
+	cat palavras/todas.txt | egrep '^[^A-Z][a-z]+íssim[ao]$' > palavras/adjetivos_issimo_artificiais.txt
+
+Foi criada uma lista artificial de adjetivos 'issimamente' a partir de uma lista de todas as palavras
+
+	cat palavras/todas.txt | egrep '^[^A-Z][a-z]+íssima$' | sed 's/íssima$/issimamente/' > palavras/adverbios_issimamente_artificiais.txt
+
+Foi criado o arquivo `palavras/artigos.txt` para artigos definidos e indefinidos.
+
+Foi criado o arquivo `palavras/artigos_preposicionados.txt`, para artigos que se combinam com preposições a, de, em e por. Foram acrescentadas as formas combinadas com a preposição 'para': pra, pro, pras, pros (uso informal).
+
+Foi criado o arquivo `palavras/preposicoes_simples.txt`, para preposicoes formadas por uma única palavra.
+
+Foi criado o arquivo `palavras/preposicoes_acidentais.txt`, para palavras de outras classes, que às vezes funcionam como preposições..
+
+Foi criado o arquivo `palavras/preposicoes_compostas.txt`, para preposicoes formadas por mais de uma palavra, sendo a última uma preposição simples, geralmente 'de', e que também são chamadas locuções prepositivas.
+
+Foi criado o arquivo `palavras/preposicoes_crase.txt`, preposições combinadas com artigo definido 'a', pronome demonstratio 'a' ou palavras 'aquela', 'aquele' e 'aquilo'.
+
+Foi criado o arquivo `palavras/conjuncoes_coordenativas.txt`.
+
+Foi criado o arquivo `palavras/conjuncoes_subordinativas.txt`.
+
+Foi criado o arquivo `palavras/adverbios.txt`.
+
+Foi criado o arquivo `palavras/adverbios_locuções.txt`.
+
+Foi criado o arquivo `palavras/adverbios_superlativos.txt`.
+
+Foi criado o arquivo `palavras/palavras_locucoes_denotativas.txt`.
+	
+Foi criado o arquivo `palavras/pronomes_pessoais_retos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_obliquos_atonos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_obliquos_tonicos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_obliquos_encliticos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_obliquos_mesocliticos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_retos_objetivos_diretos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_retos_contraidos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_obliquos_atonos_combinados.txt`.
+
+Foi criado o arquivo `palavras/pronomes_pessoais_obliquos_tonicos_preposicionados.txt`.
+
+Foi criado o arquivo `palavras/pronomes_possessivos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_demonstrativos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_demonstrativos_preposicionados.txt`.
+
+Foi criado o arquivo `palavras/pronomes_relativos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_relativos_preposicionados.txt`.
+
+Foi criado o arquivo `palavras/pronomes_interrogativos.txt`.
+
+Foi criado o arquivo `palavras/pronomes_indefinidos.txt`.
+
+Foi criado o arquivo `palavras/palavras_frequentes.txt`, que serão usadas como stop words.
+
+	cat palavras/artigos.txt > palavras/palavras_frequentes.txt
+	cat palavras/artigos_preposicionados.txt >> palavras/palavras_frequentes.txt
+	cat palavras/adverbios.txt >> palavras/palavras_frequentes.txt
+	cat palavras/conjuncoes_coordenativas.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/conjuncoes_subordinativas.txt >> palavras/palavras_frequentes.txt
+	cat palavras/preposicoes_crase.txt >> palavras/palavras_frequentes.txt
+	cat palavras/preposicoes_simples.txt >> palavras/palavras_frequentes.txt
+	cat palavras/pronomes_demonstrativos.txt >> palavras/palavras_frequentes.txt
+	cat palavras/pronomes_demonstrativos_preposicionados.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_indefinidos.txt >> palavras/palavras_frequentes.txt
+	cat palavras/pronomes_interrogativos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_obliquos_atonos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_obliquos_atonos_combinados.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_obliquos_encliticos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_obliquos_mesocliticos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_obliquos_tonicos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_obliquos_tonicos_preposicionados.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_reflexivos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_retos.txt >> palavras/palavras_frequentes.txt
+	cat palavras/pronomes_pessoais_retos_contraidos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_pessoais_retos_objetivos_diretos.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_possessivos.txt >> palavras/palavras_frequentes.txt
+	cat palavras/pronomes_relativos_preposicionados.txt >> palavras/palavras_frequentes.txt 
+	cat palavras/pronomes_relativos.txt >> palavras/palavras_frequentes.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

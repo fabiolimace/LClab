@@ -1,0 +1,24 @@
+# demonstrativos que funcionam como pronomes adjetivos ou pronomes substantivos
+este
+esse
+aquele
+estes
+esses
+aqueles
+esta
+essa
+aquela
+estas
+essas
+aquelas
+isto
+isso
+aquilo
+
+
+# demonstrativos que funcionam apenas como pronomes substantivos
+a
+o
+as
+os
+

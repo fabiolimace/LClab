@@ -1,0 +1,16 @@
+# pessoais pessoais reflexivos (ele, ela, eles, elas)
+se
+si
+consigo
+
+# pessoais pessoais reflexivos (demais pessoas: eu, tu, vós, nós)
+me
+te
+vos
+nos
+
+# pessoais pessoais recíprocos (uns aos outros, entre si, multuamente)
+nos
+vos
+se
+

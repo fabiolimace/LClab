@@ -1,0 +1,113 @@
+# subordinativas causais
+porque
+pois
+porquanto
+como
+pois que
+por isso que
+já que
+uma vez que
+visto que
+visto como
+que
+
+# subordinativas comparativas
+que
+do que
+# mais ... do que
+# menos ... do que
+# maior ... do que
+# menor ... do que
+# melhor ... do que
+tal
+# tal ... qual
+tanto
+# tanto ... quanto
+como
+assim como
+bem como
+como se
+que nem
+
+# subordinativas concessivas
+embora
+conquanto
+ainda que
+mesmo que
+posto que
+bem que
+se bem que
+apesar de que
+nem que
+que
+
+# subordinativas condicionais
+se
+caso
+contanto que
+salvo se
+sem que
+dado que
+desde que
+a menos que
+a não ser que
+
+# subordinativas conformativas
+conforme
+como
+segundo
+consoante
+
+# subordinativas consecutivas
+que
+# tal? ... que
+# tanto? ... que
+# tão? ... que
+# tamanho? ... que
+de forma que
+de maneira que
+de modo que
+de sorte que
+
+# subordinativas finais
+para que
+a fim de que
+porque
+que
+
+
+# subordinativas proporcionais
+à medida que
+ao passo que
+à proporção que
+enquanto
+quanto mais
+# quanto mais ... mais
+# quanto mais ... menos
+# quanto mais ... tanto mais
+# quanto mais ... tanto menos
+quanto menos
+# quanto menos ... menos
+# quanto menos ... tanto menos
+# quanto menos ... mais
+# quanto menos ... tanto mais
+
+# subordinativas temporais
+quando
+antes que
+depois que
+até que
+logo que
+sempre que
+assim que
+desde que
+todas as vezes que
+cada vez que
+apenas
+mal
+que
+
+# subordinativas integrantes
+que
+se
+

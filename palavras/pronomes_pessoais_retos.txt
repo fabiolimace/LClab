@@ -1,0 +1,15 @@
+# pessoais pessoais retos
+eu
+tu
+ele
+ela
+nós
+vós
+eles
+elas
+
+# pessoais pessoais retos (consagrados pelo uso)
+você
+vocês
+
+
