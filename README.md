@@ -11,7 +11,7 @@ No final do processamento, haverá um arquivo com o nome `database.db` que conte
 
 Definição do schema da base `database.db`:
 
-```
+```sql
 CREATE TABLE tb_token (
 	tokid   integer primary key, -- hash(token)
 	token   text not null,       -- 1, 2 or 3 words
@@ -43,7 +43,8 @@ As amostras exibidas abaixo foram geradas a partir de uma corpus de 223 obras li
 
 Amostras da tabela `tb_token`:
 
-||tokid||token||ng||dc||idf||
+|tokid|token| ng| dc|idf|
+|-----|-----|---|---|---|
 |52547250513|quincas berro|2|2|4.714025|
 |1946607819333|passagem da|2|19|2.462733|
 |8400837519913|ilhas salomão|2|1|5.407172|
@@ -62,7 +63,8 @@ Amostras da tabela `tb_token`:
 
 Amostras da tabela `tb_document`:
 
-||docid||author||title||countsum||
+|docid|author|title|countsum|
+|-----|------|-----|--------|
 |872077297768439|Monteiro Lobato|Contos completos|175750|
 |2454032842536215|Lewis Carroll|Alice|134681|
 |71937260981337297|Seneca|Sobre a brevidade da vida|9198|
@@ -81,7 +83,8 @@ Amostras da tabela `tb_document`:
 
 Amostras da tabela `tb_document_token`:
 
-||tokid||docid||count||tf||tfidf||ln||lnidf||
+|tokid|docid|count|tf|tfidf| ln|lnidf|
+|-----|-----|-----|--|-----|---|-----|
 |4300887113479631311|3700917926416630758|14|0.000116312881651643|6.45701657458564e-05|2.70805020110221|1.50335240474028|
 |2128437972144812985|3700917926416630758|165|0.00137083039089436|5.00819175009347e-05|5.11198778835654|0.186761361859818|
 |343609820321826241|3700917926416630758|2|1.66161259502347e-05|2.38753790553732e-05|1.09861228866811|1.57857402534143|
@@ -98,7 +101,10 @@ Amostras da tabela `tb_document_token`:
 |979297643296043901|3700917926416630758|59|0.000490175715531924|6.63893989116438e-06|4.0943445622221|0.0554538027507361|
 |4493781278853348850|3700917926416630758|12|9.96967557014082e-05|3.06373115108213e-05|2.56494935746154|0.788221762294718|
 
-A base de dados de onde foram retiradas essas amostras tem o tamanho de 711,4 MB. A tabela `tb_document` possui 223 linhas, que corresponde à quantidade de livros processados; a tabela `tb_token` possui 1504562 linhas, que são as palavras e combinações de palavras extraídas dos livros; e a tabela `tb_document_token` possui 6412487 registros, que são associações entre os tokens e os livros.
+A base de dados de onde foram retiradas essas amostras tem o tamanho de 711,4 MB. A tabela `tb_document` possui 223 linhas, que corresponde à quantidade de livros processados; a tabela `tb_token` possui 1504562 linhas, que são as palavras e combinações de palavras extraídas dos livros; e a tabela `tb_document_token` possui 6412487 registros, que são associações entre os tokens e os livros. 
+
+Os itens do corpus não serão fornecidos sob nenhuma hipótese por estarem protegidos por direitos autorais.
+
 
 
 
