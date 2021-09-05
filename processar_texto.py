@@ -74,7 +74,7 @@ def insert_document_tokens(ngram, n):
 
 def get_hash(text):
 	# [Compare hashes in Python](https://gist.github.com/fabiolimace/507eac3d35900050eeb9772e5b1871ba)
-	return (zlib.crc32(text.encode('utf-8')) << 32 | zlib.adler32(text.encode('utf-8'))) & 0x7fffffffffffffff # 2^63
+	return (zlib.crc32(text.encode('utf-8')) << 32 | zlib.adler32(text.encode('utf-8'))) & 0x7fffffffffffffff # 2^63-1
 
 def get_count_sum(ngram):
 	sum = 0;
@@ -147,9 +147,9 @@ for i in list(ngram2):
 	if ngram2[i] < 2:
 		del ngram2[i]
 
-# remover 3-grams que so ocorrem 1x
+# remover 3-grams que so ocorrem 2x ou menos
 for i in list(ngram3):
-	if ngram3[i] < 2:
+	if ngram3[i] < 3:
 		del ngram3[i]
 
 # calculando quantidades de tokens por documento
