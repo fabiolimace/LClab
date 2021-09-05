@@ -75,7 +75,7 @@ def insert_document_tokens(ngram, n):
 
 def get_hash(text):
 	# [Compare hashes in Python](https://gist.github.com/fabiolimace/507eac3d35900050eeb9772e5b1871ba)
-	return zlib.crc32(text.encode('utf-8')) << 32 | zlib.adler32(text.encode('utf-8'))
+	return (zlib.crc32(text.encode('utf-8')) << 32 | zlib.adler32(text.encode('utf-8'))) & 0x7fffffffffffffff # 2^63
 
 def get_count_sum(ngram):
 	sum = 0;
