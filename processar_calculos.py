@@ -16,11 +16,11 @@ def gravar_calculos_tfidf():
 	cur.execute("select count(distinct docid) from tb_document;")
 	total_documents = cur.fetchone()[0]
 
-	# Update tb_token.dc // DC: document count
-	cur.execute("update tb_token as t set dc = (select count(x.docid) from tb_document_token x where x.tokid = t.tokid);")
+	# Update tb_token.df // DF: document frequence
+	cur.execute("update tb_token as t set df = (select count(x.docid) from tb_document_token x where x.tokid = t.tokid);")
 
-	# IDF = LOG ( DOCUMENTS_TOTAL / DC )
-	cur.execute("select tokid, dc from tb_token;")
+	# IDF = LOG ( DOCUMENTS_TOTAL / DF )
+	cur.execute("select tokid, df from tb_token;")
 	for i in cur.fetchall():
 		
 		cur.execute("update tb_token set idf = %f where tokid = %d;" % (math.log(total_documents / i[1]), i[0]))

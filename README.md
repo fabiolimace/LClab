@@ -16,8 +16,8 @@ CREATE TABLE tb_token (
 	tokid   integer primary key, -- hash(token)
 	token   text not null,       -- 1, 2 or 3 words
 	ng      integer,             -- NGRAM: 1, 2 or 3
-	dc      integer,             -- DC: document count
-	idf     real                 -- IDF = LOG ( DOCUMENTS_TOTAL / DC )
+	df      integer,             -- DF: document frequence
+	idf     real                 -- IDF = LOG ( DOCUMENTS_TOTAL / DF )
 );
 CREATE TABLE tb_document (
 	docid    integer primary key, -- hash(author + title)
@@ -43,7 +43,7 @@ As amostras exibidas abaixo foram geradas a partir de uma corpus de 223 obras li
 
 Amostras da tabela `tb_token`:
 
-||tokid||token||ng||dc||idf||
+||tokid||token||ng||df||idf||
 |52547250513|quincas berro|2|2|4.714025|
 |1946607819333|passagem da|2|19|2.462733|
 |8400837519913|ilhas salomão|2|1|5.407172|
