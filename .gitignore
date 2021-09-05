@@ -128,10 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# arquivos protegidos por direitos autorais
-corpus*/*
+# ocultar arquivos protegidos
+backup/*
+corpus/*
 !corpus/README.md
-preparacao*/*
+preparacao/*
 !preparacao/README.md
 database.db*
 
