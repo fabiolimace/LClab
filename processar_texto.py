@@ -3,7 +3,7 @@
 import os
 import sys
 import math
-import hashlib
+import zlib
 import sqlite3
 import tempfile
 
@@ -72,9 +72,10 @@ def insert_document_tokens(ngram, n):
 
 	con.commit()
 	con.close()
-	
+
 def get_hash(text):
-	return int.from_bytes(hashlib.sha1(text.encode('utf-8')).digest()[:8], byteorder='big') & 0x7fffffffffffffff # 2^63
+	# [Compare hashes in Python](https://gist.github.com/fabiolimace/507eac3d35900050eeb9772e5b1871ba)
+	return zlib.crc32(text.encode('utf-8')) << 32 | zlib.adler32(text.encode('utf-8'))
 
 def get_count_sum(ngram):
 	sum = 0;
