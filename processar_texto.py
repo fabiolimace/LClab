@@ -31,6 +31,20 @@ author = filename.split("-")[1].replace('.txt.preparado','').strip()
 
 f = open(document, 'r')
 
+def insert_tokens(ngrams, ng):
+	con = sqlite3.connect(database_file)
+	cur = con.cursor()
+	
+	for k in ngrams.keys():
+		token = k
+		tokid = get_hash(token)
+		cur.execute('SELECT token FROM tb_token WHERE tokid = %d;' % (tokid));
+		if cur.fetchone() is None:
+			cur.execute("INSERT INTO tb_token (tokid, token, ng) VALUES (%d, '%s', %d);" % (tokid, token, ng))
+
+	con.commit()
+	con.close()
+	
 def insert_document(author, title, countsum):
 	docid = get_hash(author + title)
 	con = sqlite3.connect(database_file)
@@ -38,36 +52,22 @@ def insert_document(author, title, countsum):
 	cur.execute("INSERT INTO tb_document (docid, author, title, countsum) VALUES (%d, '%s', '%s', %d);" % (docid, author, title, countsum))
 	con.commit()
 	con.close()
-
-def insert_tokens(ngram, n):
+	
+def insert_document_tokens(author, title, ngrams, countsum):
 	con = sqlite3.connect(database_file)
 	cur = con.cursor()
 	
-	for i in ngram:
-		token = i
-		tokid = get_hash(token)
-		cur.execute('SELECT token FROM tb_token WHERE tokid = %d;' % (tokid));
-		if cur.fetchone() is None:
-			cur.execute("INSERT INTO tb_token (tokid, token, ng) VALUES (%d, '%s', %d);" % (tokid, token, n))
-
-	con.commit()
-	con.close()
+	records = []
 	
-def insert_document_tokens(ngram, n, countsum):
-	con = sqlite3.connect(database_file)
-	cur = con.cursor()
-	
-	document_tokens = []
-	
-	for i in ngram:
-		token = i
+	for k in ngrams.keys():
+		token = k
 		tokid = get_hash(token)
 		docid = get_hash(author + title)
-		count = ngram[i]
+		count = ngrams[k]
 		tf = count / countsum
-		document_tokens.append((tokid, docid, count, tf))
-		
-	cur.executemany("INSERT INTO tb_document_token (tokid, docid, count, tf) VALUES (?, ?, ?, ?);", document_tokens)
+		records.append((tokid, docid, count, tf))
+	
+	cur.executemany("INSERT INTO tb_document_token (tokid, docid, count, tf) VALUES (?, ?, ?, ?);", records)
 
 	con.commit()
 	con.close()
@@ -133,22 +133,20 @@ ngram2 = { k:v for (k,v) in ngram2.items() if not ngram2[k] < 2}
 # remover 3-grams que so ocorrem 2x ou menos
 ngram3 = { k:v for (k,v) in ngram3.items() if not ngram3[k] < 3}
 
-# calculando quantidades de tokens por documento
-countsum = 0
-for i in ngram1:
-	countsum = countsum + ngram1[i]
-for i in ngram2:
-	countsum = countsum + ngram2[i]
-for i in ngram3:
-	countsum = countsum + ngram3[i]
+# juntar os ngramas
+ngrams = dict()
+ngrams.update(ngram1)
+ngrams.update(ngram2)
+ngrams.update(ngram3)
+
+# somando as quantidades absolutas de ngramas
+countsum = sum(ngrams.values())
 
 # inserir os tokens no banco
-insert_document(author, title, countsum)
 insert_tokens(ngram1, 1)
 insert_tokens(ngram2, 2)
 insert_tokens(ngram3, 3)
-insert_document_tokens(ngram1, 1, countsum)
-insert_document_tokens(ngram2, 2, countsum)
-insert_document_tokens(ngram3, 3, countsum)
+insert_document(author, title, countsum)
+insert_document_tokens(author, title, ngrams, countsum)
 
 
