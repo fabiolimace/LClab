@@ -129,9 +129,9 @@ dmypy.json
 .pyre/
 
 # arquivos protegidos por direitos autorais
-corpus/*
+corpus*/*
 !corpus/README.md
-preparacao/*
+preparacao*/*
 !preparacao/README.md
 database.db*
 
