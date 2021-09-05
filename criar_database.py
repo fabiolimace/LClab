@@ -30,9 +30,7 @@ CREATE TABLE tb_document_token (
 	docid    integer not null,   -- hash(author + title)
 	count    integer,            -- COUNT: token count
 	tf       real,               -- TF    = COUNT / COUNTSUM
-	tfidf    real,               -- TFIDF = TF * IDF
-	ln       real,               -- LN    = LOG (1 + COUNT)
-	lnidf    real                -- LNIDF = LN * IDF
+	tfidf    real                -- TFIDF = TF * IDF
 );
 '''
 

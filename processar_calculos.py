@@ -27,9 +27,6 @@ def gravar_calculos_tfidf():
 	# TFIDF = TF * IDF
 	cur.execute("update tb_document_token as d set tfidf = (tf * (select x.idf from tb_token x where x.tokid = d.tokid));")
 
-	# LNIDF = LN * IDF
-	cur.execute("update tb_document_token as d set lnidf = (ln * (select x.idf from tb_token x where x.tokid = d.tokid));")
-
 	con.commit()
 	con.close()
 	
