@@ -133,5 +133,5 @@ corpus/*
 !corpus/README.md
 preparacao/*
 !preparacao/README.md
-database.db
+database.db*
 
