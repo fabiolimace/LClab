@@ -65,7 +65,7 @@ def insert_document_tokens(ngram, n):
 		docid = get_hash(author + title)
 		count = ngram[i]
 		tf = count / countsum
-		ln = math.log(1 + count)
+		ln = math.log10(1 + count)
 		document_tokens.append((tokid, docid, count, tf, ln))
 		
 	cur.executemany("INSERT INTO tb_document_token (tokid, docid, count, tf, ln) VALUES (?, ?, ?, ?, ?);", document_tokens)

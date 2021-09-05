@@ -22,8 +22,7 @@ def gravar_calculos_tfidf():
 	# IDF = LOG ( DOCUMENTS_TOTAL / DF )
 	cur.execute("select tokid, df from tb_token;")
 	for i in cur.fetchall():
-		
-		cur.execute("update tb_token set idf = %f where tokid = %d;" % (math.log(total_documents / i[1]), i[0]))
+		cur.execute("update tb_token set idf = %f where tokid = %d;" % (math.log10(total_documents / i[1]), i[0]))
 
 	# TFIDF = TF * IDF
 	cur.execute("update tb_document_token as d set tfidf = (tf * (select x.idf from tb_token x where x.tokid = d.tokid));")
