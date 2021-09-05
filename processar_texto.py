@@ -53,7 +53,7 @@ def insert_tokens(ngram, n):
 	con.commit()
 	con.close()
 	
-def insert_document_tokens(ngram, n):
+def insert_document_tokens(ngram, n, countsum):
 	con = sqlite3.connect(database_file)
 	cur = con.cursor()
 	
@@ -124,20 +124,14 @@ for line in s:
 		stopwords.append(word)
 s.close()
 
-# remover as stop words	
-for i in list(ngram1):
-	if i in stopwords:
-		del ngram1[i]
+# remover as stop words
+ngram1 = { k:v for (k,v) in ngram1.items() if k not in stopwords}
 
 # remover 2-grams que so ocorrem 1x
-for i in list(ngram2):
-	if ngram2[i] < 2:
-		del ngram2[i]
+ngram2 = { k:v for (k,v) in ngram2.items() if not ngram2[k] < 2}
 
 # remover 3-grams que so ocorrem 2x ou menos
-for i in list(ngram3):
-	if ngram3[i] < 3:
-		del ngram3[i]
+ngram3 = { k:v for (k,v) in ngram3.items() if not ngram3[k] < 3}
 
 # calculando quantidades de tokens por documento
 countsum = 0
@@ -153,8 +147,8 @@ insert_document(author, title, countsum)
 insert_tokens(ngram1, 1)
 insert_tokens(ngram2, 2)
 insert_tokens(ngram3, 3)
-insert_document_tokens(ngram1, 1)
-insert_document_tokens(ngram2, 2)
-insert_document_tokens(ngram3, 3)
+insert_document_tokens(ngram1, 1, countsum)
+insert_document_tokens(ngram2, 2, countsum)
+insert_document_tokens(ngram3, 3, countsum)
 
 
