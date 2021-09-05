@@ -81,21 +81,11 @@ def get_count_sum(ngram):
 	for i in ngram:
 		sum = sum + ngram[i]
 
-desinencias = [['ássemos','asse'], ['êssemos','esse'], ['íssemos','isse'], ['ávamos','a'], ['áramos','a'], ['aremos','a'], ['ariam','a'], ['assem','a'], ['astes','a'], ['dora','dor'], ['êramos','e'], ['eremos','e'], ['eriam','e'], ['essem','e'], ['estes','e'], ['íamos','ia'], ['íramos','e'], ['iremos','e'], ['iriam','e'], ['issem','e'], ['istes','e'], ['ões', 'ão'], ['veis', 'vel'], ['asse','a'], ['esse','e'], ['isse','e'], ['arei','a'], ['erei','e'], ['irei','e'], ['iam','ia'], ['amos','a'], ['emos','e'], ['ado','a'], ['ido','e'], ['imos', 'e'], ['ando', 'a'], ['endo', 'e'], ['indo', 'e'], ['avas','a'], ['ava','a'], ['ais','al'], ['eis','el'], ['ar','a'], ['er','e'], ['ir','e'], ['s', '']]
-
-def remover_desinencia(word):
-#	if len(word) > 6:
-#		for i in desinencias:
-#			if word[len(word)-len(i[0]):] == i[0]:
-#				return word[:len(word)-len(i[0])]+i[1]
-	return word
-
 for line in f:
 	itens = line.split()
 	
 	## ngram 1
 	for i in itens:
-		i = remover_desinencia(i)
 		if i in ngram1:
 			ngram1[i] = ngram1[i] + 1
 		else:
@@ -104,7 +94,6 @@ for line in f:
 	## ngram 2
 	temp = []
 	for i in itens:
-		i = remover_desinencia(i)
 		temp.append(i)
 		if len(temp) == 2:
 			s = ' '.join(temp)
@@ -117,7 +106,6 @@ for line in f:
 	## ngram 3
 	temp = []
 	for i in itens:
-		i = remover_desinencia(i)
 		temp.append(i)
 		if len(temp) == 3:
 			s = ' '.join(temp)
@@ -127,7 +115,6 @@ for line in f:
 				ngram3[s] = 1
 			temp = temp[1:]
 f.close()
-
 
 # carregar as stop words
 s = open(stopwords_file, 'r')
