@@ -24,6 +24,12 @@ date
 echo '------------------------------------------'
 
 echo '------------------------------------------'
+echo 'Limpando diretorio de saida'
+echo '------------------------------------------'
+find "${DIRETORIO_SAIDA}" -type f -name "*.txt" -delete;
+find "${DIRETORIO_SAIDA}" -type f -name "*.txt.preparado" -delete;
+
+echo '------------------------------------------'
 echo 'Copiando dos arquivos'
 echo '------------------------------------------'
 find "${DIRETORIO_ENTRADA}" -type f -name "*.txt" -exec cp -v {} "${DIRETORIO_SAIDA}/" \;
@@ -46,7 +52,9 @@ fi;
 echo '------------------------------------------'
 echo 'Processando os arquivos'
 echo '------------------------------------------'
-find "${DIRETORIO_SAIDA}" -type f -name "*.txt.preparado" -exec bash -c '/usr/bin/python3 ./processar_texto.py "'{}'"' \;
+find "${DIRETORIO_SAIDA}" -type f -name "*.txt.preparado" | sort | while read line; do
+	bash -c "/usr/bin/python3 ./processar_texto.py '${line}'";
+done;
 
 echo '------------------------------------------'
 echo 'Processando os calculos'
