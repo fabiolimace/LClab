@@ -101,6 +101,20 @@ def get_unigrams(itens):
 			unigrams[i] = 1
 	return unigrams
 
+def get_bigrams(itens):
+	bigrams = {}
+	temp = []
+	for i in itens:
+		temp.append(i)
+		if len(temp) == 2:
+			s = ' '.join(temp)
+			if s in bigrams:
+				bigrams[s] = bigrams[s] + 1
+			else:
+				bigrams[s] = 1
+			temp = temp[1:]
+	return bigrams
+
 for line in f:
 	itens = line.split()
 	
@@ -109,16 +123,8 @@ for line in f:
 	ngram1.update(unigrams)
 
 	## ngram 2
-	temp = []
-	for i in itens:
-		temp.append(i)
-		if len(temp) == 2:
-			s = ' '.join(temp)
-			if s in ngram2:
-				ngram2[s] = ngram2[s] + 1
-			else:
-				ngram2[s] = 1
-			temp = temp[1:]
+	bigrams = get_bigrams(itens)
+	ngram2.update(bigrams)
 
 	## ngram 3
 	temp = []
