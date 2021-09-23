@@ -12,7 +12,6 @@ document = sys.argv[1]
 
 # variables
 database_file = "database.db"
-stopwords_file = 'stopwords.txt'
 
 # n-grams
 ngram1 = {}
@@ -30,6 +29,17 @@ title =  filename.split("-")[0].strip()
 author = filename.split("-")[1].replace('.txt.preparado','').strip()
 
 f = open(document, 'r')
+
+def get_stopwords():
+	stopwords = []
+	f = open('stopwords.txt', 'r')
+	for line in f:
+		word = line.strip()
+		# ignore empty lines and commented lines
+		if len(word) > 0 and word[0] != '#':
+			stopwords.append(word)
+	f.close()
+	return stopwords;
 
 def insert_tokens(ngrams, ng):
 	con = sqlite3.connect(database_file)
@@ -117,12 +127,7 @@ for line in f:
 f.close()
 
 # carregar as stop words
-s = open(stopwords_file, 'r')
-for line in s:
-	word = line.strip()
-	if len(word) > 0 and word[0] != '#':
-		stopwords.append(word)
-s.close()
+stopwords = get_stopwords()
 
 # remover as stop words
 ngram1 = { k:v for (k,v) in ngram1.items() if k not in stopwords}
