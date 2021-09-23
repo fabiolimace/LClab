@@ -91,16 +91,23 @@ def get_count_sum(ngram):
 	for i in ngram:
 		sum = sum + ngram[i]
 
+# ngram 1
+def get_unigrams(itens):
+	unigrams = {}
+	for i in itens:
+		if i in unigrams:
+			unigrams[i] = unigrams[i] + 1
+		else:
+			unigrams[i] = 1
+	return unigrams
+
 for line in f:
 	itens = line.split()
 	
 	## ngram 1
-	for i in itens:
-		if i in ngram1:
-			ngram1[i] = ngram1[i] + 1
-		else:
-			ngram1[i] = 1
-			
+	unigrams = get_unigrams(itens)
+	ngram1.update(unigrams)
+
 	## ngram 2
 	temp = []
 	for i in itens:
@@ -112,7 +119,7 @@ for line in f:
 			else:
 				ngram2[s] = 1
 			temp = temp[1:]
-			
+
 	## ngram 3
 	temp = []
 	for i in itens:
