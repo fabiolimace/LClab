@@ -14,9 +14,9 @@ document = sys.argv[1]
 database_file = "database.db"
 
 # n-grams
-ngram1 = {}
-ngram2 = {}
-ngram3 = {}
+ngrams1 = {}
+ngrams2 = {}
+ngrams3 = {}
 
 # black list
 stopwords = []
@@ -27,8 +27,6 @@ print("Processando o arquivo '%s'" % document)
 filename = document.split("/")[::-1][0]
 title =  filename.split("-")[0].strip()
 author = filename.split("-")[1].replace('.txt.preparado','').strip()
-
-f = open(document, 'r')
 
 def get_stopwords():
 	stopwords = []
@@ -91,8 +89,7 @@ def get_count_sum(ngram):
 	for i in ngram:
 		sum = sum + ngram[i]
 
-# ngram 1
-def get_unigrams(itens):
+def get_ngrams1(itens):
 	unigrams = {}
 	for i in itens:
 		if i in unigrams:
@@ -101,7 +98,7 @@ def get_unigrams(itens):
 			unigrams[i] = 1
 	return unigrams
 
-def get_bigrams(itens):
+def get_ngrams2(itens):
 	bigrams = {}
 	temp = []
 	for i in itens:
@@ -115,55 +112,53 @@ def get_bigrams(itens):
 			temp = temp[1:]
 	return bigrams
 
-for line in f:
-	itens = line.split()
-	
-	## ngram 1
-	unigrams = get_unigrams(itens)
-	ngram1.update(unigrams)
-
-	## ngram 2
-	bigrams = get_bigrams(itens)
-	ngram2.update(bigrams)
-
-	## ngram 3
+def get_ngrams3(itens):
+	trigrams = {}
 	temp = []
 	for i in itens:
 		temp.append(i)
 		if len(temp) == 3:
 			s = ' '.join(temp)
-			if s in ngram3:
-				ngram3[s] = ngram3[s] + 1
+			if s in trigrams:
+				trigrams[s] = trigrams[s] + 1
 			else:
-				ngram3[s] = 1
+				trigrams[s] = 1
 			temp = temp[1:]
+	return trigrams
+
+# carregar n-gramas
+f = open(document, 'r')
+itens = f.read().split()
+ngrams1 = get_ngrams1(itens)
+ngrams2 = get_ngrams2(itens)
+ngrams3 = get_ngrams3(itens)
 f.close()
 
 # carregar as stop words
 stopwords = get_stopwords()
 
 # remover as stop words
-ngram1 = { k:v for (k,v) in ngram1.items() if k not in stopwords}
+ngrams1 = { k:v for (k,v) in ngrams1.items() if k not in stopwords}
 
 # remover 2-grams que so ocorrem 1x
-ngram2 = { k:v for (k,v) in ngram2.items() if not ngram2[k] < 2}
+ngrams2 = { k:v for (k,v) in ngrams2.items() if not ngrams2[k] < 2}
 
 # remover 3-grams que so ocorrem 2x ou menos
-ngram3 = { k:v for (k,v) in ngram3.items() if not ngram3[k] < 3}
+ngrams3 = { k:v for (k,v) in ngrams3.items() if not ngrams3[k] < 3}
 
 # juntar os ngramas
 ngrams = dict()
-ngrams.update(ngram1)
-ngrams.update(ngram2)
-ngrams.update(ngram3)
+ngrams.update(ngrams1)
+ngrams.update(ngrams2)
+ngrams.update(ngrams3)
 
 # somando as quantidades absolutas de ngramas
 countsum = sum(ngrams.values())
 
 # inserir os tokens no banco
-insert_tokens(ngram1, 1)
-insert_tokens(ngram2, 2)
-insert_tokens(ngram3, 3)
+insert_tokens(ngrams1, 1)
+insert_tokens(ngrams2, 2)
+insert_tokens(ngrams3, 3)
 insert_document(author, title, countsum)
 insert_document_tokens(author, title, ngrams, countsum)
 
