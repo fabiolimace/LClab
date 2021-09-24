@@ -1,3 +1,5 @@
+# LC Lab
+
 ### Como usar
 
 1. incluir arquivos em texto puro, no formato TXT, dentro do diretório `corpus`;
