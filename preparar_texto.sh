@@ -31,6 +31,9 @@ sed -i 's/[,.?!;:]\+/\n/g' "${TEMPORARIO}"
 # remover caracteres que não são alfanuméricos, preservando hífen e espaço
 sed -i 's/[^a-zA-Z -]//g' "${TEMPORARIO}"
 
+# remover travessoes de obras obtidas do Projeto Gutemberg, substituindo-os por espacos simples
+sed -i 's/--/ /g' "${TEMPORARIO}"
+
 # substituir letras maiusculas por letras minusculas
 cat "${TEMPORARIO}" | tr 'A-ZÇÁÀÂÃÉÊÍÓÔÕÚÜ' 'a-zçáàâãéêíóôõúü' > "${TEMPORARIO}".lower
 mv "${TEMPORARIO}".lower "${TEMPORARIO}"

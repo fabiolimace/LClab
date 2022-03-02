@@ -129,10 +129,11 @@ dmypy.json
 .pyre/
 
 # ocultar arquivos protegidos
+database.db*
 backup/*
 corpus/*
-!corpus/README.md
 preparacao/*
+!corpus/README.md
+!exemplos/database.db
 !preparacao/README.md
-database.db*
 

@@ -1,13 +1,21 @@
 # TF-IDF Simples
 
-Em programa em lote que processa um corpus e gera uma base de dados que contém valores de TF-IDF para cada n-grama.
+Este é um programa em lote que processa um corpus e gera uma base de dados que contém valores de TF-IDF para cada n-grama.
 
 ### Como usar
 
-1. incluir arquivos em texto puro, no formato TXT, dentro do diretório `corpus`;
-2. iniciar o processamento, executando o arquivo bash `run.sh`.
+Siga os passos abaixo:
+
+1. Inclua arquivos em texto puro, codificados com UTF-8, dentro da pasta `corpus`;
+2. Inicie o processamento, executando o arquivo bash `run.sh`.
+
+Os nomes dos arquivos devem ter o seguinte padrão: `TITULO_DA_OBRA - NOME_DO_AUTOR.txt`, por exemplo: "Dom Casmurro - Machado de Assis.txt".
 
 No final do processamento, haverá um arquivo com o nome `database.db` que conterá todos os tokens extraídos do corpus. O arquivo é uma base de dados SQLite3. Os tokens são n-gramas até 3. Cada token conterá os valores calculados de TF, IDF e TFIDF.
+
+### Exemplos
+
+A pasta `exemplos/corpus` contém 15 obras de Machado de Assis e de Eça de Queirós, baixadas do site do [Projeto Gutenberg](https://www.gutenberg.org/browse/languages/pt).
 
 ### Schema da base de dados
 
