@@ -1,5 +1,7 @@
 # TF-IDF Simples
 
+Em programa em lote que processa um corpus e gera uma base de dados que contém valores de TF-IDF para cada n-grama.
+
 ### Como usar
 
 1. incluir arquivos em texto puro, no formato TXT, dentro do diretório `corpus`;
