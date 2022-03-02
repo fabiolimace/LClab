@@ -1,4 +1,4 @@
-# Simple TFIDF
+# TF-IDF
 
 ### Como usar
 
